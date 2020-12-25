@@ -145,3 +145,4 @@ if __name__ == '__main__':
     print(checked)
     print('\nTime needed:')
     print(timeneeded)
+    
