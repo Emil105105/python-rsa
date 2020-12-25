@@ -1,18 +1,7 @@
-#!requires python3.8 or later!
-#
-#sorry for my bad English
-#if you don't want to import 'random' from the standard library, you can replace 'randint' and 'randrange' with your own functions
 from random import randrange
 from random import randint
 
-#this is just to show how fast the algorithm is
-#remove this in your projects
-from time import time
-starttime = time()
 
-#the rabin miller primality test algorithm isn't a 100% correct algorithm for checking if a number is prime
-#if you want a 100% correct algorithm, use the function 'isprime' and fill out the essential fields
-#thanks to https://gist.github.com/Ayrx for a python implementation
 def ismillerprime(n, k):
     if n == 1:
         return False
@@ -38,22 +27,6 @@ def ismillerprime(n, k):
         else:
             return False
     return True
-
-# you can delete this part if you want to use the faster rabin miller primality test
-# 
-# def isprime(n):
-#     if n == 1:
-#         return False
-#     if n in [2, 3, 5, 7]:
-#         return True
-#     s = n ** 0.5 #you can use import math and math.sqrt(n) here
-#     for p in [put here the list of prime numbers up to 10 ** (rsanlength / 4 + 1)]:
-#         if p > s:
-#             break
-#         if n % p == 0:
-#             return False
-#     return True
-# 
 
 
 def randomprime(length, millerrounds):
@@ -86,7 +59,7 @@ def generatekeys(length, millerrounds):
     del q
     return [[e, n], [d, n]]
 
-#please notice that only integers (or text/binary data that was convertet to an integer) can be encrypted
+
 def encrypt(number, publickey):
     cipher = pow(number, publickey[0], publickey[1])
     return cipher
@@ -96,8 +69,7 @@ def decrypt(cipher, privatekey):
     number = pow(cipher, privatekey[0], privatekey[1])
     return number
 
-#please notice that only integers (or text/binary data that was convertet to an integer) can be used to create a certificate
-#I recommend to use the hash of the message instead
+
 def createcertificate(message, privatekey):
     certificate = pow(message, privatekey[0], privatekey[1])
     return certificate
@@ -106,43 +78,3 @@ def createcertificate(message, privatekey):
 def checkcertificate(certificate, publickey):
     message = pow(certificate, publickey[0], publickey[1])
     return message
-
-
-if __name__ == '__main__':
-    #this is an example. Delete this part in your project
-    #the recommended number of rounds for the rabin miller prime test is 64 and the optimal number of rounds is 40
-    #the larger the number, the smaller the probability that a number is incorrectly recognized as a prime
-    millerrouds = 64
-    #this is the number of base 10 digits of the mod number(N or n) of the RSA algorithm
-    #for secure encryption this number should be higher than 300
-    rsanlength = 320
-    keys = generatekeys(rsanlength, millerrouds)
-    publickeys = keys[0]
-    privatekeys = keys[1]
-    message = randint(10 ** 4, 10 ** 8)
-    encrypted = encrypt(message, publickeys)
-    decrypted = decrypt(encrypted, privatekeys)
-    certificate = createcertificate(message, privatekeys)
-    checked = checkcertificate(certificate, publickeys)
-    timeneeded = time() - starttime
-    print('\nPublickeys:')
-    print(publickeys[0])
-    print()
-    print(publickeys[1])
-    print('\nPrivatekeys:')
-    print(privatekeys[0])
-    print()
-    print(privatekeys[1])
-    print('\nMessage:')
-    print(message)
-    print('\nEncrypted:')
-    print(encrypted)
-    print('\nDecrypted:')
-    print(decrypted)
-    print('\nCertificate:')
-    print(certificate)
-    print('\nChecked certificate:')
-    print(checked)
-    print('\nTime needed:')
-    print(timeneeded)
-    
