@@ -96,15 +96,15 @@ def decrypt(cipher, privatekey):
     number = pow(cipher, privatekey[0], privatekey[1])
     return number
 
-#please notice that only integers (or text/binary data that was convertet to an integer) can be used to create a certificate
+#please notice that only integers (or text/binary data that was convertet to an integer) can be used to create a signature
 #I recommend to use the hash of the message instead
-def createcertificate(message, privatekey):
-    certificate = pow(message, privatekey[0], privatekey[1])
-    return certificate
+def createsignature(message, privatekey):
+    signature = pow(message, privatekey[0], privatekey[1])
+    return signature
 
 
-def checkcertificate(certificate, publickey):
-    message = pow(certificate, publickey[0], publickey[1])
+def checksignature(signature, publickey):
+    message = pow(signature, publickey[0], publickey[1])
     return message
 
 
@@ -122,8 +122,8 @@ if __name__ == '__main__':
     message = randint(10 ** 4, 10 ** 8)
     encrypted = encrypt(message, publickeys)
     decrypted = decrypt(encrypted, privatekeys)
-    certificate = createcertificate(message, privatekeys)
-    checked = checkcertificate(certificate, publickeys)
+    signature = createsignature(message, privatekeys)
+    checked = checksignature(signature, publickeys)
     timeneeded = time() - starttime
     print('\nPublickeys:')
     print(publickeys[0])
@@ -139,9 +139,9 @@ if __name__ == '__main__':
     print(encrypted)
     print('\nDecrypted:')
     print(decrypted)
-    print('\nCertificate:')
-    print(certificate)
-    print('\nChecked certificate:')
+    print('\nSignature:')
+    print(signature)
+    print('\nChecked signature:')
     print(checked)
     print('\nTime needed:')
     print(timeneeded)
