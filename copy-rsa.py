@@ -68,10 +68,10 @@ class RSA:
         number = pow(cipher, privatekey[0], privatekey[1])
         return number
     
-    def createcertificate(self, message, privatekey):
-        certificate = pow(message, privatekey[0], privatekey[1])
-        return certificate
+    def createsignature(self, message, privatekey):
+        signature = pow(message, privatekey[0], privatekey[1])
+        return signature
     
-    def checkcertificate(self, certificate, publickey):
-        message = pow(certificate, publickey[0], publickey[1])
+    def checksignature(self, signature, publickey):
+        message = pow(signature, publickey[0], publickey[1])
         return message
