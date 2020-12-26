@@ -70,11 +70,11 @@ def decrypt(cipher, privatekey):
     return number
 
 
-def createcertificate(message, privatekey):
-    certificate = pow(message, privatekey[0], privatekey[1])
-    return certificate
+def createsignature(message, privatekey):
+    signature = pow(message, privatekey[0], privatekey[1])
+    return signature
 
 
-def checkcertificate(certificate, publickey):
-    message = pow(certificate, publickey[0], publickey[1])
+def checksignature(signature, publickey):
+    message = pow(signature, publickey[0], publickey[1])
     return message
