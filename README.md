@@ -10,5 +10,3 @@ copy-rsa.py -> RSA algorithm as a copyalbe class without comments
 This code is copyright FREE. Please credit me and link to my github account.
 
 Thanks to https://gist.github.com/Ayrx for a python implementation of the rabin miller primality test.
-
-sorry for my bad english
