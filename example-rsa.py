@@ -1,6 +1,5 @@
 #!requires python3.8 or later!
 #
-#sorry for my bad English
 #if you don't want to import 'random' from the standard library, you can replace 'randint' and 'randrange' with your own functions
 from random import randrange
 from random import randint
